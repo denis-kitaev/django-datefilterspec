@@ -155,7 +155,7 @@ class DateRangeFilter(admin.filters.FieldListFilter):
         Pop the original parameters, and return the date filter & other filter
         parameters.
         """
-        
+
         cl.params.pop(self.lookup_kwarg_since, None)
         cl.params.pop(self.lookup_kwarg_upto, None)
         return ({
@@ -199,7 +199,18 @@ class DateTimeRangeFilter(admin.filters.FieldListFilter):
         self.form = self.get_form(request)
 
     def choices(self, cl):
-        return []
+        """
+        Pop the original parameters, and return the date filter & other filter
+        parameters.
+        """
+
+        cl.params.pop(self.lookup_kwarg_since_0, None)
+        cl.params.pop(self.lookup_kwarg_since_1, None)
+        cl.params.pop(self.lookup_kwarg_upto_0, None)
+        cl.params.pop(self.lookup_kwarg_upto_1, None)
+        return ({
+            'get_query': cl.params,
+        }, )
 
     def expected_parameters(self):
         return [self.lookup_kwarg_since_0, self.lookup_kwarg_since_1, self.lookup_kwarg_upto_0, self.lookup_kwarg_upto_1]
